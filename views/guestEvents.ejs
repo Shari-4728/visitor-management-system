@@ -1,0 +1,117 @@
+<!-- include header -->
+<%- include('partials/_header') %>
+<!-- /include header -->
+
+<header>
+  <%- include('partials/_guestNav') %>
+</header>
+
+<main class="dash_main">
+  <div class="grid event-grid">
+    <div class="col_e1 col1 cols">
+      <div class="row_box events_box">
+          <div>
+            <h2>Upcoming Events</h2>
+            <p>Using this platform to to to join events prior to when they're held helps us make plans of the respective events according to the number of participants.</p>
+          </div>
+          <div>
+            <img src="images/ill1.jpg" alt="event"/>
+          </div>
+        </div>
+      <div class="updates">
+        <ul class="recent_events">
+          <h1>Upcoming Events</h1>
+          <% for(var i = 0; i < events.length; i++ ) {%>
+            <li class="event">
+              <h2><%= events[i].name %></h2>
+              <h4>
+                <span>Date: <%= events[i].date %></span>
+                <br>
+                <span>Time: <%= events[i].time %></span>
+              </h4>
+                <p><%= events[i].description %></p>
+                <div style="width: 100%; display: flex; justify-content: end; margin-top: 1rem">
+                  <a href="/joinPage?id=<%= events[i]._id%>" class="btn btn_guest_sec openEventModal">
+                    <span>
+                      <img style="width: 100%;" src="images/request.svg" alt="req">
+                    </span>
+                    <span>
+                      Join
+                    </span>
+                  </a>
+                </div>
+            </li>        
+          <%} %>        
+        </ul>
+      </div>
+    </div>
+
+    <!-- <div class="col_e2 cols col2">
+      <div class="user_activity">
+        <div class="user_info">
+          <span>
+            <img src="images/user.svg" alt="user" class="user_wel">
+          </span>
+          <span>
+            <h5>John Doe</h5>
+          </span>
+        </div>
+        <div class="arrow_box">
+          <img src="images/arrow-down.svg" alt="arrow" class="arrow">
+        </div>
+      </div>
+
+      <div class="activity_details">
+        <div>
+          <h3>Appointments</h3>
+          <p>
+            <span>Requested: </span>
+            <span>4</span>
+          </p>
+          <p>
+            <span>Granted: </span>
+            <span>1</span>
+          </p>
+          <p>
+            <span>Pending: </span>
+            <span>3</span>
+          </p>
+        </div>
+  
+        <div>
+          <h3>Events</h3>
+          <p>
+            <span>Upcoming: </span>
+            <span>6</span>
+          </p>
+          <p>
+            <span>Booked: </span>
+            <span>3</span>
+          </p>
+        </div>
+  
+      </div>
+    </div> -->
+  </div>
+</main>
+
+<script>
+  
+  const openEventModals = document.querySelectorAll('.openEventModal');
+  const eventModal = document.querySelector('.eventModal');
+  const closeAptModal = document.querySelector('.closeAptModal');
+
+  openEventModals.forEach((openEventModal) => {
+    openEventModal.addEventListener('click', ()=> {
+      eventModal.showModal();
+    });
+  });
+
+  closeAptModal.addEventListener('click', ()=> {
+      eventModal.close();
+  });
+</script>
+
+<!-- include footer -->
+<%- include('partials/_footer') %>
+<!-- /include footer -->

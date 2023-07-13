@@ -1,0 +1,48 @@
+<!-- include header -->
+<%- include('partials/_header') %>
+<!-- /include header -->
+<header>
+  <%- include('partials/_homeNav') %>
+</header>
+
+<style>
+  h1 {
+    text-align: center; margin-top: 8px; font-style: italic; font-family: 'Bona Nova'; font-size: 28px;
+    color: white;
+  }
+  h1 span {
+    font-style: italic; font-size: 32px; font-family: 'Bona Nova';
+  }
+  p {
+    color: rgb(233, 226, 226);
+  }
+</style>
+<main>
+  
+  <div class="home_wrapper">
+      <div class="intro-section">
+        <h1>Welcome to <span>Sort</span></h1>
+        <p style="text-align: center; margin-top: 8px;">
+          Sort is a visitor management system that is used to book appointments and joining events prior to when they're held. 
+        </p>
+        <div class="ill">
+          <img src="images/ill2.jpg" alt="ill">
+        </div>
+      </div>
+      <div class="options">
+        <a class="box b1" href="/guestForm">
+          <div style="font-size: 28px;">Visitor</div>
+          <div><img class="vis_img" src="images/guest.svg" /></div>
+        </a>
+      
+        <a class="box b2" href="/adminForm">
+          <div style="font-size: 28px;">Admin</div>
+          <div><img class="admin_img" src="images/admin.svg" /></div>
+        </a>
+      </div>
+  </div>
+</main>
+
+<!-- include footer -->
+<%- include('partials/_footer') %>
+<!-- /include footer -->

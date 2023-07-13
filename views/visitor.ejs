@@ -1,0 +1,141 @@
+<!-- include header -->
+<%- include('partials/_header') %>
+<!-- /include header -->
+
+<header>
+  <%- include('partials/_guestNav') %>
+</header>
+
+<main class="dash_main">
+  <div class="grid">
+    <div class="cols col1">
+      <div class="wel row_box">
+        <div>
+          <h1>Hello,</h1>
+          <p>Welcome to our visitor management system. Check out our appointment scheduling and Upcoming events and make bookings at your own convenience.</p>
+        </div>
+        <div>
+          <img src="images/ill3.jpg" alt="guest" class="guest_ill">
+        </div>
+      </div>
+      <div class="updates">
+        <div class="apt_cal_box">
+          <h2>Appointment Calendar</h2>
+          <p>This table entails the available time periods for guests or visitors to make appointments. The shceduling is universal for all departments.</p>
+          
+          <table class="calendar">
+            <caption>
+              Appointment Calendar
+            </caption>
+            <thead>
+              <tr>
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+              <th>Thursday</th>
+              <th>Friday</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-cell="Monday">
+                  <div>11:00am - 12:00pm</div>
+                </td>
+                <td data-cell="Tuesday">
+                  <div>10:00am - 11:00am</div>
+                </td>
+                <td data-cell="Wednesday">
+                  unavailable
+                </td>
+                <td data-cell="Thursday">
+                  <div>2:00pm - 3:00pm</div>
+                </td>
+                <td data-cell="Friday">
+                  unavailable
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <a href="/guestAps" class="btn btn_guest_sec">
+            <span>
+            <img style="width: 100%; background: transparent;" src="images/clock-file.svg" />
+            </span>
+            <span>Go to Appointments</span>
+          </a>
+        </div>
+        
+        <div class="row_box events_box">
+          <div>
+            <h2>Upcoming Events</h2>
+            
+            <p>Using this platform to to to join events prior to when they're held helps us make plans of the respective events according to the number of participants.</p>
+            <br/>
+            <a href="/guestEvents" class="btn btn_guest_sec">
+              <span>
+                <img style="width: 100%; background: transparent;" src="images/submit.png" />
+              </span>
+              <span>Go to events</span>
+            </a>
+          </div>
+          <div>
+            <img src="images/ill1.jpg" alt="event"/>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+<!--     
+    <div class="cols col2">
+      <div class="user_activity">
+        <div class="user_info">
+          <span>
+            <img src="images/user.svg" alt="user" class="user_wel">
+          </span>
+          <span>
+            <h5>John Doe</h5>
+          </span>
+        </div>
+        <div class="arrow_box">
+          <img src="images/arrow-down.svg" alt="arrow" class="arrow">
+        </div>
+      </div>
+
+      <div class="activity_details">
+        <div>
+          <h3>Appointments</h3>
+          <p>
+            <span>Requested: </span>
+            <span>4</span>
+          </p>
+          <p>
+            <span>Granted: </span>
+            <span>1</span>
+          </p>
+          <p>
+            <span>Pending: </span>
+            <span>3</span>
+          </p>
+        </div>
+  
+        <div>
+          <h3>Events</h3>
+          <p>
+            <span>Upcoming: </span>
+            <span>6</span>
+          </p>
+          <p>
+            <span>Booked: </span>
+            <span>3</span>
+          </p>
+        </div>
+  
+      </div>
+    </div> -->
+  </div>
+
+</main>
+
+<!-- include footer -->
+<%- include('partials/_footer') %>
+<!-- /include footer -->

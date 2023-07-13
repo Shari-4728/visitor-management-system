@@ -1,0 +1,134 @@
+<!-- include header -->
+<%- include('partials/_header') %>
+<!-- /include header -->
+
+<header>
+  <%- include('partials/_homeNav') %>
+</header>
+<main>
+  <div class="form_container">
+    <div class="form_ill">
+      <div class="ill_img">
+        <img src="images/ill8.jpg" alt="ill">
+      </div>
+    </div>
+
+    <div class="form_box">
+      <h4>Use this form to create an admin account or <span>
+        <a href="/adminForm" style="--a-clr: #f3b31f;">
+          Login here
+        </a>
+      </span>
+      </h4>
+      <div class="form_wrapper">
+        <div class="form_head" style="--bg-clr: #ffa117;">
+        SignUp
+        </div>
+      <form class="form" class=".form">
+        <div class="field">
+          <div class="icon">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div>
+            <input type="text" placeholder="Username" name="username"/>
+          </div>
+        </div>
+        
+        <div class="err username_err"></div>
+      
+        <div class="field">
+          <div class="icon">
+            <i class="fa-solid fa-key"></i>
+          </div>
+          <div>
+            <input type="password" placeholder="Auth key" name="authkey"/>
+          </div>
+        </div>
+        
+        <div class="err key_err"></div>
+      
+        <div class="field">
+          <div class="icon">
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <div>
+            <input type="password" placeholder="Password" name="password"/>
+          </div>
+        </div>
+        
+        <div class="err pass_err"></div>
+      
+        <button type="submit" class="btn btn_admin submit">
+          <span>Sign Up</span>
+          <span>
+          <img style="width: 100%; background: transparent;" src="images/submit.png" />
+          </span>
+        </button>
+      </form>
+      </div>
+    </div>
+  </div>
+    
+</main>
+
+  <script> 
+    const form = document.querySelector ('form');
+    const username_err = document.querySelector (".username_err");
+    const key_err = document.querySelector (".key_err");
+    const password_err = document.querySelector (".pass_err");
+    const errs = document.querySelectorAll('.err');
+    
+    //reset errors
+    username_err.textContent = "";
+    key_err.textContent = "";
+    password_err.textContent = "";
+    
+    form.addEventListener ('submit', async (e) => {
+      e.preventDefault();
+      
+      const username = form.username.value;
+      const auth_key = form.authkey.value;
+      const password = form.password.value;
+      
+      try {
+        const res = await fetch('/createAdmin', {
+          method: 'POST',
+          body: JSON.stringify({ username, auth_key, password }),
+          headers: { 'Content-Type': 'application/json' }
+        })
+        
+        const data = await res.json();
+        console.log (data);
+        
+        if (data.errors) {
+          errs.forEach(err => {
+            err.style = `
+              padding: 0.5rem;
+              text-align: center;
+              text-wrap: wrap;
+              border: 2px solid crimson;
+              color: crimson;
+              border-radius: 12px;
+              width: 60%;
+            `
+          });
+
+          username_err.textContent = data.errors.username;
+          key_err.textContent = data.errors.auth_key;
+          password_err.textContent = data.errors.password;
+        }
+        
+        if (data.admin) {
+          location.assign('/admin');
+          console.log("woza");
+        }
+      }
+      catch (err){
+        console.log (err);
+      }
+    })
+  </script>
+
+<!-- include footer -->
+<%- include('partials/_footer') %>
+<!-- /include footer -->

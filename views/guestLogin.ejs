@@ -1,0 +1,131 @@
+<!-- include header -->
+<%- include('partials/_header') %>
+<!-- /include header -->
+
+<header>
+  <%- include('partials/_homeNav') %>
+</header>
+
+<main>
+  <div class="form_container">
+    <div class="form_ill">
+      <h2>
+        Welcome back,
+      </h2>
+      <br>
+      <h3>Jump right back in and continue booking appointments and joining events.</h3>
+
+      <div class="ill_img">
+        <img src="images/ill5.jpg" alt="ill">
+      </div>
+    </div>
+
+    <div class="form_box">
+      <h4>Enter your Email address to continue or fill out <span>
+        <a href="/guestForm">
+          this form 
+        </a>
+      </span>if you're visiting for the first time
+      </h4>
+      <div class="form_wrapper">
+          <div class="form_head" style="--bg-clr: #36eb68;">
+          Login
+          </div>
+          <form class="form" class=".form">
+          <div class="field">
+            <div class="icon">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div>
+              <input type="email" placeholder="Email Address" name="email"/>
+            </div>
+          </div>
+          
+          <div class="err email_err"></div>
+          
+          <div class="field">
+            <div class="icon">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <div>
+              <input type="password" placeholder="Password" name="password"/>
+            </div>
+          </div>
+          
+          <div class="err pass_err"></div>
+        
+          <button type="submit" class="btn btn_guest submit">
+            <span>Login</span>
+            <span>
+            <img style="width: 100%; background: transparent;" src="images/submit.png" />
+            </span>
+          </button>
+          </form>
+      </div>
+      <br>
+      <p>
+        <span>Note: </span>
+        <span>Standard form procedures for account creation and logging in are required in order to keep your activity private</span>
+      </p>
+    </div>
+
+  </div>
+</main>
+
+  <script> 
+    const form = document.querySelector ('form');
+    const email_err = document.querySelector (".email_err");
+    const password_err = document.querySelector (".pass_err");
+    const errs = document.querySelectorAll('.err');
+    
+    //reset errors
+    email_err.textContent = " ";
+    password_err.textContent = " ";
+    
+    form.addEventListener ('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = form.email.value;
+      const password = form.password.value;
+      
+      try {
+        const res = await fetch('/loginGuest', {
+          method: 'POST',
+          body: JSON.stringify({ email, password }),
+          headers: { 'Content-Type': 'application/json' }
+        })
+        
+        const data = await res.json();
+        console.log (data);
+        
+        if (data.errors) {
+          errs.forEach(err => {
+            err.style = `
+              padding: 0.5rem;
+              text-align: center;
+              text-wrap: wrap;
+              border: 2px solid crimson;
+              color: crimson;
+              border-radius: 12px;
+              width: 60%;
+            `
+          });
+          
+          email_err.textContent = data.errors.email;
+          password_err.textContent = data.errors.password;
+        }
+        
+        if (data.guest) {
+          location.assign('/visitor');
+          console.log("woza");
+        }
+      }
+      catch (err){
+        console.log (err);
+      }
+    })
+  </script>
+
+<!-- include footer -->
+<%- include('partials/_footer') %>
+<!-- /include footer -->

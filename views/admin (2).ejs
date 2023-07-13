@@ -1,0 +1,480 @@
+<!-- include header -->
+<%- include('partials/_header') %>
+<!-- /include header -->
+<header>
+  <%- include('partials/_adminNav') %>
+</header>
+
+<main class="dash_main">
+  <div class="grid admin_dashboard">
+    <div class="cols col1 col_ad1">
+      <div class="wel_ad row_box">
+        <div>
+          <h1>Welcome back,</h1>
+          <p>Use this platform to approve appointments and post Upcoming events.</p>
+        </div>
+        <div>
+          <img src="images/ill8.jpg" alt="guest" class="guest_ill">
+        </div>
+      </div>
+      
+      <div class="ad_updates updates">
+        <div class="rec_apt">
+          <h2>Recent Appointments</h2>
+          <p>Here are some recently booked appointments by various visitors.</p>
+          <br/>
+          <table>
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+              <tr>
+                <td data-cell="Email" class="emailInfo">johndoe@hotmail.com</td>
+                <td data-cell="Department" class="deptInfo">Academics</td>
+                <td data-cell="Date" class="dateInfo">23-7-2023</td>
+                <td data-cell="Time" class="timeInfo">0200 hrs</td>
+                <td data-cell="Description" class="descInfo">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
+                <td data-cell="Action" class="action">
+                   <div class="approve">
+                    <a class="btn btn_admin">
+                      Approve
+                    </a>
+                   </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+              <tr>
+                <td data-cell="Email" class="emailInfo">johndoe@hotmail.com</td>
+                <td data-cell="Department" class="deptInfo">Academics</td>
+                <td data-cell="Date" class="dateInfo">23-7-2023</td>
+                <td data-cell="Time" class="timeInfo">0200 hrs</td>
+                <td data-cell="Description" class="descInfo">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
+                <td data-cell="Action" class="action">
+                   <div class="approve">
+                    <a class="btn btn_admin">
+                      Approve
+                    </a>
+                   </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <br/>
+          <a href="/adminAps" class="btn btn_admin_sec">
+            Show More
+          </a>
+        </div>
+
+        <div class="recent_events">
+          <h1 class="ad_h1">
+            <span>Upcoming Events</span>
+            <span>
+              <button class="btn btn_admin_sec submit post">
+                <span>Post Event</span>
+                <span>
+                  <img style="width: 100%;" src="images/post.svg" alt="post">
+                </span>
+              </button>
+            </span>
+          </h1>
+           <div class="event">
+          <h2>Event</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam laudantium officia soluta dolorum sed inventore deleniti vero ad eveniet distinctio assumenda, veniam unde quod pariatur, architecto quo neque quasi expedita!</p>
+          <div style="width: 100%; display: flex; justify-content: end; margin-top: 1rem">
+          </div>
+        </div>
+          <div class="event">
+          <h2>Event</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam laudantium officia soluta dolorum sed inventore deleniti vero ad eveniet distinctio assumenda, veniam unde quod pariatur, architecto quo neque quasi expedita!</p>
+          <div style="width: 100%; display: flex; justify-content: end; margin-top: 1rem">
+          </div>
+        </div>
+          <div class="event">
+          <h2>Event</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam laudantium officia soluta dolorum sed inventore deleniti vero ad eveniet distinctio assumenda, veniam unde quod pariatur, architecto quo neque quasi expedita!</p>
+          <div style="width: 100%; display: flex; justify-content: end; margin-top: 1rem">
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="cols col_ad2 col2">
+      <div class="user_activity">
+        <div class="user_info">
+          <span>
+            <img src="images/user.svg" alt="user" class="user_wel">
+          </span>
+          <span>
+            <h5>John Doe</h5>
+          </span>
+        </div>
+        <div class="arrow_box">
+          <img src="images/arrow-down.svg" alt="arrow" class="arrow">
+        </div>
+      </div>
+
+      <div class="activity_details">
+        <div>
+          <h3>Appointments</h3>
+          <p>
+            <span>Approved: </span>
+            <span>18</span>
+          </p>
+          <p>
+            <span>Pending: </span>
+            <span>7</span>
+          </p>
+        </div>
+  
+        <div>
+          <h3>Events</h3>
+          <p>
+            <span>Upcoming: </span>
+            <span>14</span>
+          </p>
+          <p>
+            <span>Posted: </span>
+            <span>6</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <dialog class="apt_form_box eventModal appr">
+    <div class="form_head apt_f_head" style="--bg-clr: #ffa117;">
+      <span>Approve Booking</span>
+      <span style="width: 10%;">
+        <img class="closeAptModal" style="width: 100%;" src="images/close.svg" alt="close">
+      </span>
+    </div>
+    <form class="apt_form form" id="approve_apt" method="dialog">
+      <div class="apt_field">
+        <label for="email">Email: </label>
+        <input type="email" placeholder="Email Address" Value="johndoe@google.com" name="email">
+      </div>
+      
+      <div class="emailErr err"></div>
+
+      <div class="apt_field select">
+        <label for="department">Department: </label>
+        <select name="department" id="department">
+          <option value="Academics">Academics</option>
+          <option value="Sports">Sports</option>
+          <option value="Finances">Finances</option>
+          <option value="Accomodation">Accomodation</option>
+        </select>
+      </div>
+      
+      <div class="deptErr err"></div>
+
+      <div class="apt_field">
+        <label for="date">Date:</label>
+        <input type="date" min="2023-07-01" max="2023-09-30" name="date">
+      </div>
+      
+      <div class="dateErr err"></div>
+      
+      <div class="apt_field">
+        <label for="time">Time:</label>
+        <input type="time" placeholder="Time" name="time">
+      </div>
+      
+      <div class="timeErr err"></div>
+
+      <div class="apt_field">
+        <label for="description">Description: </label>
+        <textarea placeholder="Describe what the appointment is for..." name="description" cols="30" rows="5"></textarea>
+      </div>
+      
+      <div class="descErr err"></div>
+
+      <h4 style="padding: 2px 6px; color: #090a13;">Pass Provision</h4>
+      <br>
+      <div class="passes">
+        <span>     
+          <h5 style="width: 100%; text-align: left; color: #2f323f;">Level 1 Access</h5>
+        </span>
+        <span>
+          <input type="radio" value="level 1" name="access">
+        </span>
+      </div>
+
+      <div class="passes">
+        <span>     
+          <h5 style="width: 100%; text-align: left; color: #2f323f;">Level 2 Access</h5>
+        </span>
+        <span>
+          <input type="radio" value="level 2" name="access">
+        </span>
+      </div>
+
+      <div class="passes">
+        <span>     
+          <h5 style="width: 100%; text-align: left; color: #2f323f;">Level 3 Access</h5>
+        </span>
+        <span>
+          <input type="radio" value="level 3" name="access">
+        </span>
+      </div>
+
+      <div class="err passErr"></div>
+      
+      <button class="btn submit btn_admin" type="submit">
+        Approve
+      </button>
+    </form>
+  </dialog>
+
+  <dialog class="apt_form_box eventModal postModal">
+    <div class="form_head apt_f_head" style="--bg-clr: #ffa117;">
+      <span>Post Event</span>
+      <span style="width: 10%;">
+        <img class="closeAptModal" style="width: 100%;" src="images/close.svg" alt="close">
+      </span>
+    </div>
+    <form class="apt_form form" id="postEvent" method="dialog">
+
+      <div class="apt_field">
+        <label for="name">Event Name:</label>
+        <input type="text" name="name" placeholder="Name">
+      </div>
+      <div class="nameErr err"></div>
+
+      <div class="apt_field">
+        <label for="dedscription">Description:</label>
+        <textarea name="description" cols="30" rows="5" placeholder="Event Description..."></textarea>
+      </div>
+      <div class="descErr err"></div>
+
+      <div class="apt_field">
+        <label for="date">Date:</label>
+        <input type="date" min="2023-07-01" max="2023-09-30" name="date">
+      </div>
+      <div class="dateErr err"></div>
+
+      <div class="apt_field">
+        <label for="time">Time:</label>
+        <input type="time" name="time">
+      </div>
+      <div class="timeErr err"></div>
+      
+      <button class="btn submit btn_admin" type="submit">
+        Post
+      </button>
+    </form>
+  </dialog>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script> 
+  const openEventModals = document.querySelectorAll('.approve');
+  const appr = document.querySelector('.appr');
+  const openPostModal = document.querySelector('.post');
+  const postModal = document.querySelector('.postModal');
+  const closeAptModals = document.querySelectorAll('.closeAptModal');
+
+  const appr_form = document.querySelector ('#approve_apt');
+
+      const email = appr_form.email.value;
+      const access = appr_form.access.value;
+      const department = appr_form.department.value;
+      const date = appr_form.date.value;
+      const time = appr_form.time.value;
+      const description = appr_form.description.value;
+
+       const tdInfos = document.querySelectorAll('tr').children.length;
+       console.log(tdInfos);
+      //const timeInfo = tdInfos[3].textContent;
+
+  openEventModals.forEach((openEventModal) => {
+    openEventModal.addEventListener('click', async ()=> {
+      // if (user) {
+
+      //   email = user.user.email;
+      //   access = user.appointment.pass_type;
+      //   department = user.appointment.department;
+      // }
+
+      // axios.get('http://localhost:3000/find/:id', {params: {id: req.query.id}})
+      // .then(aptInfo => {
+      //   console.log(aptInfo.data);
+      // }).catch(err => console.log(err));
+
+      // try {
+      //   const result = await fetch ('/find/:id', {method: 'GET', params: {id: req.query.id}});
+      //   const data = await result.json();
+
+      //   console.log(data);
+      //   // if (data.aptInfo) {
+      //   //   console.log(data.aptInfo)
+      //   // } else {
+      //   //   console.log("Error");
+      //   // }
+      // } catch (err) {
+      //   console.log(err);
+      // }
+
+      appr.showModal();
+
+    });
+  });
+
+  openPostModal.addEventListener('click', ()=> {
+    postModal.showModal();
+  });
+
+  closeAptModals.forEach((closeAptModal) => {
+    closeAptModal.addEventListener('click', ()=> {
+      appr.close();
+      postModal.close();
+    });
+  });
+
+
+  /* Form Action*/
+    // const appr_form = document.querySelector ('#approve_apt');
+    const post_form = document.querySelector ('#postEvent');
+    
+    const email_err = document.querySelector (".emailErr");
+    const name_err = document.querySelector (".nameErr");
+    const desc_err = document.querySelector (".descErr");
+    const date_err = document.querySelector (".dateErr");
+    const time_err = document.querySelector (".timeErr");
+    const pass_err = document.querySelector (".passErr");
+    const errs = document.querySelectorAll('.err');
+    
+
+    //reset errors
+    email_err.textContent = " ";
+    name_err.textContent = " ";
+    desc_err.textContent = " ";
+    date_err.textContent = " ";
+    time_err.textContent = " ";
+    pass_err.textContent = " ";
+
+    //EventForm
+    post_form.addEventListener ('submit', async (e) => {
+      e.preventDefault();
+      
+      const name = post_form.name.value;
+      const description = post_form.description.value;
+      const date = post_form.date.value;
+      const time = post_form.time.value;
+      
+      try {
+        const res = await fetch('/postEvent', {
+          method: 'POST',
+          body: JSON.stringify({ name, description, date, time }),
+          headers: { 'Content-Type': 'application/json' }
+        })
+        
+        const data = await res.json();
+        console.log (data);
+        
+        if (data.errors) {
+          errs.forEach(err => {
+            err.style =  `
+              padding: 0.5rem;
+              text-align: center;
+              text-wrap: wrap;
+              border: 2px solid crimson;
+              color: crimson;
+              border-radius: 12px;
+              width: 60%;
+            `;
+          })
+          desc_err.textContent = data.errors.description;
+          name_err.textContent = data.errors.name;
+          date_err.textContent = data.errors.date;
+          time_err.textContent = data.errors.time;
+
+        }
+        if(data.event) {
+          location.assign('/adminEvents');
+        }
+      }
+      catch (err){
+        console.log (err);
+      }
+    })
+
+    //ApptApprovalForm
+    appr_form.addEventListener ('submit', async (e) => {
+      e.preventDefault();
+
+      const unique_id = Math.ceil(Math.random() * 1000000);
+      
+      // const email = appr_form.email.value;
+      // const access = appr_form.access.value;
+      // const department = appr_form.department.value;
+      // const date = appr_form.date.value;
+      // const time = appr_form.time.value;
+      // const description = appr_form.description.value;
+      
+      try {
+        const res = await fetch('/approve', {
+          method: 'PATCH',
+          body: JSON.stringify({ email, department, date, time, description, access, unique_id }),
+          headers: { 'Content-Type': 'application/json' }
+        });
+        
+        const data = await res.json();
+        console.log (data);
+        
+        if (data.errors) {
+          errs.forEach(err => {
+            err.style =  `
+              padding: 0.5rem;
+              text-align: center;
+              text-wrap: wrap;
+              border: 2px solid crimson;
+              color: crimson;
+              border-radius: 12px;
+              width: 60%;
+            `;
+          })
+          email_err.textContent = data.errors.email;
+          pass_err.textContent = data.errors.access;
+        }
+        if (data.approval) {
+          location.assign('/adminAps')
+        }
+      }
+      catch (err){
+        console.log (err);
+      }
+    })
+
+</script>
+
+<!-- include footer -->
+<%- include('partials/_footer') %>
+<!-- /include footer -->

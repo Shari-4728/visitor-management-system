@@ -1,0 +1,278 @@
+<!-- include header -->
+<%- include('partials/_header') %>
+<!-- /include header -->
+<header>
+  <%- include('partials/_adminNav') %>
+</header>
+
+<main class="dash_main">
+
+  <div class="grid admin_dashboard">
+    <div class="cols col1 col_ad1">
+      <div class="wel_ad row_box">
+        <div>
+          <h1>Welcome back,</h1>
+          <p>Use this platform to approve appointments and post Upcoming events.</p>
+        </div>
+        <div>
+          <img src="images/ill8.jpg" alt="guest" class="guest_ill">
+        </div>
+      </div>
+      
+      <div class="ad_updates updates">
+        <div class="rec_apt">
+          <h2>Recent Appointments</h2>
+          <p>Here are some recently booked appointments by various visitors.</p>
+          <br/>
+          <table>
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+              <%
+                for(var i = 0; i < appointments.length; i++) {%>
+                  <tr>
+                    <td data-cell="Email"><%= appointments[i].user.email %></td>  
+                    <td data-cell="Department"><%= appointments[i].appointment.department %></td>
+                    <td data-cell="Date"><%= appointments[i].appointment.date %></td>
+                    <td data-cell="Description"><%= appointments[i].appointment.description %></td>
+                    <td data-cell="Action">
+                       <a href="/approveApt?id=<%=appointments[i]._id%>" class="btn btn_admin approve">
+                         Approve
+                       </a>
+                    </td>
+                  </tr>
+                <%}
+              %>
+            </tbody>
+          </table>
+          <br/>
+          <a href="/adminAps" class="btn btn_admin_sec">
+            Show More
+          </a>
+        </div>
+
+        <div>
+          <ul class="recent_events">
+            <h1 class="ad_h1">
+              <span>Upcoming Events</span>
+              <span>
+                <button class="btn btn_admin_sec submit post">
+                  <span>Post Event</span>
+                  <span>
+                    <img style="width: 100%;" src="images/post.svg" alt="post">
+                  </span>
+                </button>
+              </span>
+            </h1>
+            <% for(var i = 0; i < events.length; i++ ) {%>
+              <li class="event">
+                <h2><%= events[i].name %></h2>
+                <h4>
+                  <span>Date: <%= events[i].date %></span>
+                  <br>
+                  <span>Time: <%= events[i].time %></span>
+                </h4>
+                <p><%= events[i].description %></p>               
+              </li>        
+            <%} %>        
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    
+    <!-- <div class="cols col_ad2 col2">
+      <div class="user_activity">
+        <div class="user_info">
+          <span>
+            <img src="images/user.svg" alt="user" class="user_wel">
+          </span>
+          <span>
+            <h5>John Doe</h5>
+          </span>
+        </div>
+        <div class="arrow_box">
+          <img src="images/arrow-down.svg" alt="arrow" class="arrow">
+        </div>
+      </div>
+    
+      <div class="activity_details">
+        <div>
+          <h3>Appointments</h3>
+          <p>
+            <span>Approved: </span>
+            <span>18</span>
+          </p>
+          <p>
+            <span>Pending: </span>
+            <span>7</span>
+          </p>
+        </div>
+    
+        <div>
+          <h3>Events</h3>
+          <p>
+            <span>Upcoming: </span>
+            <span>14</span>
+          </p>
+          <p>
+            <span>Posted: </span>
+            <span>6</span>
+          </p>
+        </div>
+      </div>
+    </div> -->
+  </div>
+
+  <dialog class="apt_form_box eventModal postModal">
+    <div class="form_head apt_f_head" style="--bg-clr: #ffa117;">
+      <span>Post Event</span>
+      <span style="width: 10%;">
+        <img class="closeAptModal" style="width: 100%;" src="images/close.svg" alt="close">
+      </span>
+    </div>
+    <form class="apt_form form" id="postEvent" method="dialog">
+
+      <div class="apt_field">
+        <label for="name">Event Name:</label>
+        <input type="text" name="name" placeholder="Name">
+      </div>
+      <div class="nameErr err"></div>
+
+      <div class="apt_field">
+        <label for="dedscription">Description:</label>
+        <textarea name="description" cols="30" rows="5" placeholder="Event Description..."></textarea>
+      </div>
+      <div class="descErr err"></div>
+
+      <div class="apt_field">
+        <label for="venue">Description:</label>
+        <input type="text" name="venue" placeholder="Venue">
+      </div>
+      <div class="venueErr err"></div>
+
+      <div class="apt_field">
+        <label for="date">Date:</label>
+        <input type="date" min="2023-07-01" max="2023-09-30" name="date">
+      </div>
+      <div class="dateErr err"></div>
+
+      <div class="apt_field">
+        <label for="time">Time:</label>
+        <input type="time" name="time">
+      </div>
+      <div class="timeErr err"></div>
+      
+      <button class="btn submit btn_admin" type="submit">
+        Post
+      </button>
+    </form>
+  </dialog>
+</main>
+
+<script> 
+
+  const openEventModals = document.querySelectorAll('.approve');
+  const appr = document.querySelector('.appr');
+  const openPostModal = document.querySelector('.post');
+  const postModal = document.querySelector('.postModal');
+  const closeAptModal = document.querySelector('.closeAptModal');
+/*
+  openEventModals.forEach((openEventModal) => {
+    openEventModal.addEventListener('click', ()=> {
+      appr.showModal();
+    });
+  });
+*/
+  openPostModal.addEventListener('click', ()=> {
+    postModal.showModal();
+  });
+
+  closeAptModal.addEventListener('click', ()=> {
+    postModal.close();
+  });
+
+
+  /* Form Action*/
+    const post_form = document.querySelector ('#postEvent');
+    
+
+    const name_err = document.querySelector (".nameErr");
+    const desc_err = document.querySelector (".descErr");
+    const date_err = document.querySelector (".dateErr");
+    const time_err = document.querySelector (".timeErr");
+    const venue_err = document.querySelector (".venueErr");
+    const errs = document.querySelectorAll('.err');
+    
+    
+    //reset errors
+
+    name_err.textContent = " ";
+    desc_err.textContent = " ";
+    date_err.textContent = " ";
+    time_err.textContent = " ";
+    venue_err.textContent = " ";
+
+    
+    post_form.addEventListener ('submit', async (e) => {
+      e.preventDefault();
+      
+      const name = post_form.name.value;
+      const description = post_form.description.value;
+      const date = post_form.date.value;
+      const time = post_form.time.value;
+      const venue = post_form.venue.value;
+      
+      try {
+        const res = await fetch('/postEvent', {
+          method: 'POST',
+          body: JSON.stringify({ name, description, venue, date, time }),
+          headers: { 'Content-Type': 'application/json' }
+        })
+        
+        const data = await res.json();
+        console.log (data);
+        
+        if (data.errors) {
+          errs.forEach(err => {
+            err.style = `
+              padding: 0.5rem;
+              text-align: center;
+              text-wrap: wrap;
+              border: 2px solid crimson;
+              color: crimson;
+              border-radius: 12px;
+              width: 60%;
+            `
+          });
+           
+          venue_err.textContent = data.errors.venue;
+          name_err.textContent = data.errors.name;
+          desc_err.textContent = data.errors.description;
+          date_err.textContent = data.errors.date;
+          time_err.textContent = data.errors.time;
+        }
+        if (data.event) {
+          location.assign('/adminEvents');
+        }
+      }
+      catch(err){
+        console.log (err);
+      }    
+      
+    }
+    )
+    
+</script>
+
+<!-- include footer -->
+<%- include('partials/_footer') %>
+<!-- /include footer -->

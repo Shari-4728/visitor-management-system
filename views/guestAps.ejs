@@ -1,0 +1,292 @@
+<!-- include header -->
+<%- include('partials/_header') %>
+<!-- /include header -->
+
+<header>
+  <%- include('partials/_guestNav') %>
+</header>
+
+<main class="dash_main">
+  <div class="grid event-grid">
+    <div class="col_e1 col1 cols">
+      <div class="apt_cal_box">
+        <h2>Appointment Calendar</h2>
+        <p>This table entails the available time periods for guests or visitors to make appointments. The shceduling is universal for all departments.</p>
+        <br/>
+        <table class="calendar">
+          <caption>
+           Appointment Calendar
+          </caption>
+          <thead>
+            <tr>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-cell="Monday">
+                <div>11:00am - 12:00pm</div>
+              </td>
+              <td data-cell="Tuesday">
+                <div>10:00am - 11:00am</div>
+              </td>
+              <td data-cell="Wednesday">
+                unavailable
+              </td>
+              <td data-cell="Thursday">
+                <div>2:00pm - 3:00pm</div>
+              </td>
+              <td data-cell="Friday">
+                unavailable
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br/>
+        <button type="button" class="btn btn_guest_sec showAptModal">
+          <span>
+          <img style="width: 100%; background: transparent;" src="images/clock-file.svg" />
+          </span>
+          <span>Book Appointment</span>
+        </button>
+      </div>
+      
+      <div class="updates">
+        <div class="recent_apts">
+          <h1>My Appointments</h1>
+          <table>
+            <thead>
+              <tr>
+                <th>Department</th>
+                <th>Date</th>             
+                <th>Time</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Unique Id</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+              <%
+                for(var i = 0; i < appointments.length; i++) {%>
+                  <tr>
+                    <td data-cell="Department"><%= appointments[i].appointment.department %></td>
+                    <td data-cell="Date"><%= appointments[i].appointment.date %></td>  
+                    <td data-cell="Time"><%= appointments[i].appointment.time %></td>
+                    <td data-cell="Description"><%= appointments[i].appointment.description %></td>
+                    <td data-cell="Status"><%= appointments[i].appointment.status %></td>
+                    <td data-cell="Unique Id"><%= appointments[i].appointment.unique_id %></td>
+                  </tr>
+                <%}
+              %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="col_e2 cols col2">
+      <div class="user_activity">
+        <div class="user_info">
+          <span>
+            <img src="images/user.svg" alt="user" class="user_wel">
+          </span>
+          <span>
+            <h5>John Doe</h5>
+          </span>
+        </div>
+        <div class="arrow_box">
+          <img src="images/arrow-down.svg" alt="arrow" class="arrow">
+        </div>
+      </div>
+
+      <div class="activity_details">
+        <div>
+          <h3>Appointments</h3>
+          <p>
+            <span>Requested: </span>
+            <span>4</span>
+          </p>
+          <p>
+            <span>Granted: </span>
+            <span>1</span>
+          </p>
+          <p>
+            <span>Pending: </span>
+            <span>3</span>
+          </p>
+        </div>
+  
+        <div>
+          <h3>Events</h3>
+          <p>
+            <span>Upcoming: </span>
+            <span>6</span>
+          </p>
+          <p>
+            <span>Booked: </span>
+            <span>3</span>
+          </p>
+        </div>
+  
+      </div>
+    </div> -->
+  </div>
+
+  <dialog class="apt_form_box aptModal">
+    <div class="form_head apt_f_head" style="--bg-clr: #36eb68;">
+      <span>Book Appointment</span>
+      <span style="width: 10%;">
+        <img class="closeAptModal" style="width: 100%;" src="images/close.svg" alt="close">
+      </span>
+    </div>
+    <form id="aptForm" class="apt_form form" method="dialog">
+      <div class="apt_field">
+        <label for="email">Email: </label>
+        <input type="email" placeholder="Email Address" Value="johndoe@google.com" name="email">
+      </div>
+      
+      <div class="emailErr err"></div>
+
+      <div class="apt_field select">
+        <label for="department">Department: </label>
+        <select name="department" id="department">
+          <option value="Academics">Academics</option>
+          <option value="Sports">Sports</option>
+          <option value="Finances">Finances</option>
+          <option value="Accomodation">Accomodation</option>
+        </select>
+      </div>
+      
+      <div class="deptErr err"></div>
+
+      <div class="apt_field">
+        <label for="date">Date:</label>
+        <input type="date" min="2023-07-01" max="2023-09-30" name="date">
+      </div>
+      
+      <div class="dateErr err"></div>
+      
+      <div class="apt_field">
+        <label for="time">Time:</label>
+        <input type="time" placeholder="Time" name="time">
+      </div>
+      
+      <div class="timeErr err"></div>
+
+      <div class="apt_field">
+        <label for="description">Description: </label>
+        <textarea placeholder="Describe what the appointment is for..." name="description" cols="30" rows="5"></textarea>
+      </div>
+      
+      <div class="descErr err"></div>
+
+      <button class="btn submit btn_guest" type="submit">
+        Book
+      </button>
+    </form>
+  </dialog>
+</main>
+
+
+<script>
+  // window.onload = function(){
+  //   try {
+  //     const userEmail = 
+  //   }
+  //   catch(err) {
+  //     console.log(err);
+  //   }
+  // }
+
+  const aptFormBox = document.querySelector('.aptModal');
+  const showAptModal = document.querySelector('.showAptModal');
+  const closeAptModal = document.querySelector('.closeAptModal');
+
+  showAptModal.addEventListener('click', ()=> {
+    aptFormBox.showModal();
+  });
+
+  closeAptModal.addEventListener('click', ()=> {
+      aptFormBox.close();
+  });
+  
+  
+  //Form Action
+    const aptForm = document.querySelector ('#aptForm');
+    const email_err = document.querySelector (".emailErr");
+    const dept_err = document.querySelector (".deptErr");
+    const desc_err = document.querySelector (".descErr");
+    const date_err = document.querySelector (".dateErr");
+    const time_err = document.querySelector (".timeErr");
+  
+    const errs = document.querySelectorAll('.err');
+    
+    
+    //reset errors
+    
+    email_err.textContent = " ";
+    dept_err.textContent = " ";
+    desc_err.textContent = " ";
+    date_err.textContent = " ";
+    time_err.textContent = " ";
+    
+    aptForm.addEventListener ('submit', async (e) => {
+      e.preventDefault();
+      const pass_type = "pending";
+      const unique_id = "pending";
+
+      const email = aptForm.email.value;
+      const department = aptForm.department.value;
+      const date = aptForm.date.value;
+      const time = aptForm.time.value;
+      const description = aptForm.description.value;
+      
+      try {
+        const res = await fetch('/bookAppointment', {
+          method: 'POST',
+          body: JSON.stringify({ email, department, description, date, time, pass_type, unique_id }),
+          headers: { 'Content-Type': 'application/json' }
+        });
+        
+        const data = await res.json();
+        console.log (data);
+        
+        if (data.errors) {
+          errs.forEach(err => {
+            err.style = `
+              padding: 0.5rem;
+              text-align: center;
+              text-wrap: wrap;
+              border: 2px solid crimson;
+              color: crimson;
+              border-radius: 12px;
+              width: 60%;
+            `
+          });
+    
+          
+          email_err.textContent = data.errors.email;
+          dept_err.textContent = data.errors.department;
+          date_err.textContent = data.errors.date;
+          time_err.textContent = data.errors.time;
+          desc_err.textContent = data.errors.description;
+
+        }
+        if(data.appointment){
+          location.assign('/guestAps');
+        }
+      }
+      catch(err){
+        console.log(err);
+      }
+    })
+  
+</script>
+<!-- include footer -->
+<%- include('partials/_footer') %>
+<!-- /include footer -->

@@ -1,0 +1,152 @@
+<!-- include header -->
+<%- include('partials/_header') %>
+<!-- /include header -->
+<header>
+  <%- include('partials/_adminNav') %>
+</header>
+
+<main>
+  <div class="home_wrapper pass_wrapper">
+    <div class="pass_desc">
+      <h1>Pass Description</h1>
+      <p>Provide passes to visitors depending on the level of access you wish to give</p>
+      
+      <div class="pass_level lvl1">
+        <h3>Level 1 Access</h3>
+        <p>Visitors will be able to access all areas available to the general public;</p>
+        <p>These include: Cafeteria (Eastern & Southern Zones), Shopping Center and all public washrooms.</p>
+      </div>
+      
+      <div class="pass_level lvl2">
+        <h3>Level 2 Access</h3>
+        <p>This pass type allows access to some mildly restricted areas. (Also including level 1 pass)</p>
+        <p>These are: Cafeteria (Western zone), Student Annex and the Gym(Main Co-curricular center).</p>
+      </div>
+      
+      <div class="pass_level lvl3">
+        <h3>Level 3 Access</h3>
+        <p>The visitor can use infrastructure that's normally limited to administration personel (Also including level 1 and 2 passes.</p>
+        <p>
+          These are: all gyms, cafeterias and washrooms in administrative buildings.
+        </p>
+      </div>
+    </div>
+    
+    <div class="appr_form_hold">
+      <div class="appr">
+
+        <div class="form_head" style="--bg-clr: #ffa117;">
+          Approve Booking
+        </div>
+        <form class="apt_form form" id="approve_apt" method="POST" id="approve_appointment" >
+          <article>
+            <div class="user_details">
+              <div class="apt_field">
+                <label for="email">Email: </label>
+                <input type="email" placeholder="Email Address" Value="<%= appointment.user.email %>" name="email">
+              </div>
+        
+              <div class="apt_field select">
+                <label for="department">Department: </label>
+                <input type="text" value="<%= appointment.appointment.department %>" name="department">
+              </div>
+                  
+              <div class="apt_field">
+                <label for="date">Date:</label>
+                <input type="date" min="2023-07-01" max="2023-09-30" name="date" value="<%= appointment.appointment.date %>">
+              </div>
+                        
+              <div class="apt_field">
+                <label for="time">Time:</label>
+                <input type="time" placeholder="Time" name="time" value="<%= appointment.appointment.time %>">
+              </div>
+                  
+              <div class="apt_field">
+                <label for="description">Description: </label>
+                <textarea name="description" cols="30" rows="5"><%= appointment.appointment.description %></textarea>
+              </div>
+            </div>
+            <div class="overflow"></div>
+          </article>
+              
+          <h4 style="padding: 2px 6px; color: #090a13;">Pass Provision</h4>
+          <br>
+          <div class="passes">
+            <span>     
+              <h5 style="width: 100%; text-align: left; color: #2f323f;">Level 1 Access</h5>
+            </span>
+            <span>
+              <input type="radio" value="level 1" name="access">
+            </span>
+          </div>
+    
+          <div class="passes">
+            <span>     
+              <h5 style="width: 100%; text-align: left; color: #2f323f;">Level 2 Access</h5>
+            </span>
+            <span>
+              <input type="radio" value="level 2" name="access">
+            </span>
+          </div>
+    
+          <div class="passes">
+            <span>     
+              <h5 style="width: 100%; text-align: left; color: #2f323f;">Level 3 Access</h5>
+            </span>
+            <span>
+              <input type="radio" value="level 3" name="access">
+            </span>
+          </div>
+    
+          <div class="err passErr"></div>
+          
+          <button class="btn submit btn_admin" type="submit">
+            Approve
+          </button>
+        </form>
+        </div>
+      </div>
+    </div> 
+</main>
+
+  
+<script>
+  const form = document.querySelector("form");
+
+  form.addEventListener ('submit', async (e) => {
+    e.preventDefault();
+    const unique_id = Math.ceil(Math.random() * 1000000);
+
+    const email = form.email.value;
+    const department = form.department.value;
+    const date = form.date.value;
+    const time = form.time.value;
+    const description = form.description.value;
+    const access = form.access.value;
+    
+    try {
+      const res = await fetch('/approve/<%= appointment._id %>', {
+        method: 'PUT',
+        body: JSON.stringify({ email, department, description, date, time, access, unique_id }),
+        headers: { 'Content-Type': 'application/json' }
+      });
+      
+      const data = await res.json();
+      console.log (data);
+      
+      if(data.approval){
+        alert("Appointment approved successfully")
+        location.assign('/adminAps');
+      }
+    }
+    catch(err){
+      console.log(err);
+    }
+  })
+</script>
+  
+  <!-- include footer -->
+
+<%- include('partials/_footer') %>
+
+<!-- /include footer -->

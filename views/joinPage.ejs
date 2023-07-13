@@ -1,0 +1,86 @@
+<!-- include header -->
+<%- include('partials/_header') %>
+<!-- /include header -->
+
+<header>
+  <%- include('partials/_guestNav') %>
+</header>
+
+<main>
+    <div class="apt_form_box eventModal">
+        <div class="form_head apt_f_head" style="--bg-clr: #36eb68;">
+          Join Event
+        </div>
+        <form class="apt_form form">
+          <div class="apt_field">
+            <label for="email">Email: </label>
+            <input type="email" placeholder="Email Address" Value="johndoe@google.com" name="email">
+          </div>
+
+          <div class="err emailErr"></div>
+          
+           <div class="apt_field">
+            <label for="description">Event: </label>
+            <input type="text" placeholder="Event" name="event_name" value="<%= event.name %>" />
+          </div>
+          
+          <div class="err eventErr"></div>
+
+          <button class="btn submit btn_guest" type="submit">
+            Join
+          </button>
+        </form>
+      </div>
+</main>
+
+<script>
+  const form = document.querySelector("form");
+  const emailErr = document.querySelector(".emailErr");
+  const eventErr = document.querySelector(".eventErr");
+
+  emailErr.textContent = '';
+  eventErr.textContent = '';
+
+  form.addEventListener ('submit', async (e) => {
+    e.preventDefault();
+
+    const email = form.email.value;
+    const event_name = form.event_name.value;
+    
+    try {
+      const res = await fetch('/join', {
+        method: 'POST',
+        body: JSON.stringify({ email, event_name }),
+        headers: { 'Content-Type': 'application/json' }
+      });
+      
+      const data = await res.json();
+      console.log (data);
+      
+      if(data.joinedEvent){
+        alert("Event joined successfully")
+        location.assign('/guestEvents');
+      }
+      else if(data.errors) {
+        document.querySelectorAll('.err').style =  `
+          padding: 0.5rem;
+          text-align: center;
+          text-wrap: wrap;
+          border: 2px solid crimson;
+          color: crimson;
+          border-radius: 12px;
+          width: 60%;
+        `;
+        emailErr.textContent = data.errors.email;
+        eventErr.textContent = data.errors.event_name;
+      }
+    }
+    catch(err){
+      console.log(err);
+    }
+  })
+</script>
+
+<!-- include footer -->
+<%- include('partials/_footer') %>
+<!-- /include footer -->

@@ -1,0 +1,135 @@
+:root {
+  --admin-main: #ffa117;
+  --visitor-main: #36eb68;
+  --txt-std: #2f323f;
+  --txt-light: hsl(0, 0%, 41%);
+  --txt-dark: hsl(0, 0%, 8%);
+  --bg: hsl(0, 0%, 98%);
+  --bg-alt: hsl(0, 0%, 88%);
+}
+
+nav {
+  padding: 1rem 2px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: white;
+}
+nav .company_logo{
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo_img {
+  padding: 0;
+  height: 32px;
+  width: 120px;
+}
+.logo {
+  width:100%;
+  border-radius: 0 0 12px 12px;
+}
+.hamburger {
+  transform: scale(0);
+}
+.pages {
+  position: relative;
+  max-width: 500px;
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.pages a {
+  margin: 0 1rem;
+  color: var(--txt-std);
+  transition: 0.5s;
+}
+.pages a:hover {
+  color:#3b08c9;
+  cursor: pointer;
+  border-bottom: 2px solid var(--hv-clr);
+}
+.pages a img {
+  transform: scale(0);
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 600px){
+  nav{
+    flex-direction: column;
+  }
+  nav .company_logo{
+    width: 100%;
+    padding-right: 4px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo_img {
+    padding: 2px;
+    font-size: 20px;
+  }
+  .hamburger {
+    transform: scale(1);
+    padding: 4px;
+    margin-right: 8px;
+  }
+  .hamburger > div{
+    width: 100%;
+    width: 26px;
+    height: 2px;
+    background-color: var(--txt-dark);
+    transition: 0.5s;
+  }
+  .hamburger div:nth-child(1) {
+    transform: translateY(3px);
+  }
+  .hamburger div:nth-child(2) {
+    transform: translateY(-8px);
+  }
+  .hamburger div:nth-child(3) {
+    transform: translateY(8px);
+  }
+  .hamburger:hover {
+    cursor: pointer;
+  }
+  .hamburger.active div:nth-child(1){
+    display: none;
+  }
+  .hamburger.active div:nth-child(2){
+    transform: rotate(45deg);  
+  }
+  .hamburger.active div:nth-child(3){
+    transform: rotate(-45deg);
+  }
+  .pages {
+    display: none;
+  }
+  .pages a {
+    font-size: 1rem;
+    margin: 4px;
+    width: 100%;
+    text-align: center;
+    padding: 4px 0;
+  }
+  .pages.active {
+    display: flex;
+    padding: 0.6rem 0;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .pages a img {
+    transform: scale(1);
+    right: 4px;
+    top: 4px;
+    width: 20px;
+    height: 20px;
+  }
+}

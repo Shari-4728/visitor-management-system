@@ -1,0 +1,97 @@
+<!-- include header -->
+<%- include('partials/_header') %>
+<!-- /include header -->
+
+<header>
+  <%- include('partials/_adminNav') %>
+</header>
+<main class="dash_main">
+  <div class="grid">
+    <div class="cols col1">
+      
+      <div class="rec_apt">
+        <h2>Recent Appointments</h2>
+        <p>Here are some recently booked appointments by various visitors.</p>
+        <br/>
+        <table>
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Department</th>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          
+          <tbody>
+            <%
+              for(var i = 0; i < appointments.length; i++) {%>
+                <tr>
+                  <td data-cell="Email"><%= appointments[i].user.email %></td>  
+                  <td data-cell="Department"><%= appointments[i].appointment.department %></td>
+                  <td data-cell="Date"><%= appointments[i].appointment.date %></td>
+                  <td data-cell="Description"><%= appointments[i].appointment.description %></td>
+                  <td data-cell="Action">
+                     <a href="/approveApt?id=<%=appointments[i]._id%>" class="btn btn_admin approve">
+                       Approve
+                     </a>
+                  </td>
+                </tr>
+              <%}
+            %>
+          </tbody>
+        </table>
+        <br/>
+      </div>   
+     </div>
+    <!-- <div class="cols col_ad2 col2">
+      <div class="user_activity">
+        <div class="user_info">
+          <span>
+            <img src="images/user.svg" alt="user" class="user_wel">
+          </span>
+          <span>
+            <h5>John Doe</h5>
+          </span>
+        </div>
+        <div class="arrow_box">
+          <img src="images/arrow-down.svg" alt="arrow" class="arrow">
+        </div>
+      </div>
+
+      <div class="activity_details">
+        <div>
+          <h3>Appointments</h3>
+          <p>
+            <span>Approved: </span>
+            <span>18</span>
+          </p>
+          <p>
+            <span>Pending: </span>
+            <span>7</span>
+          </p>
+        </div>
+  
+        <div>
+          <h3>Events</h3>
+          <p>
+            <span>Upcoming: </span>
+            <span>14</span>
+          </p>
+          <p>
+            <span>Posted: </span>
+            <span>6</span>
+          </p>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</main>
+
+
+
+
+<!-- include footer -->
+<%- include('partials/_footer') %>
+<!-- /include footer -->
