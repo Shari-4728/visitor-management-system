@@ -57,10 +57,11 @@
       
       <div class="updates">
         <div class="recent_apts">
-          <h1>My Appointments</h1>
+          <h1>Appointments</h1>
           <table>
             <thead>
               <tr>
+                <th>Email</th>
                 <th>Department</th>
                 <th>Date</th>             
                 <th>Time</th>
@@ -74,6 +75,7 @@
               <%
                 for(var i = 0; i < appointments.length; i++) {%>
                   <tr>
+                    <td data-cell="Email"><%= appointments[i].user.email %></td>
                     <td data-cell="Department"><%= appointments[i].appointment.department %></td>
                     <td data-cell="Date"><%= appointments[i].appointment.date %></td>  
                     <td data-cell="Time"><%= appointments[i].appointment.time %></td>
@@ -147,7 +149,7 @@
     <form id="aptForm" class="apt_form form" method="dialog">
       <div class="apt_field">
         <label for="email">Email: </label>
-        <input type="email" placeholder="Email Address" Value="johndoe@google.com" name="email">
+        <input type="email" placeholder="Email Address" name="email">
       </div>
       
       <div class="emailErr err"></div>
