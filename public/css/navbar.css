@@ -37,7 +37,7 @@ nav .company_logo{
 }
 .pages {
   position: relative;
-  max-width: 500px;
+  max-width: 650px;
   padding: 0.6rem;
   display: flex;
   flex-direction: row;
@@ -112,13 +112,19 @@ nav .company_logo{
     display: none;
   }
   .pages a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* width: 100px; */
     font-size: 1rem;
     margin: 4px;
     width: 100%;
-    text-align: center;
+    /* text-align: center; */
     padding: 4px 0;
   }
   .pages.active {
+    margin-top: 8px;
     display: flex;
     padding: 0.6rem 0;
     width: 100%;
@@ -127,8 +133,8 @@ nav .company_logo{
   }
   .pages a img {
     transform: scale(1);
-    right: 4px;
-    top: 4px;
+    margin-right: 6px;
+    margin-bottom: 4px;
     width: 20px;
     height: 20px;
   }
